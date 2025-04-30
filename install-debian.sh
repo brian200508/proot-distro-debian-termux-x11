@@ -10,12 +10,12 @@ BOLD="$(printf '\033[1m')"
 
 function banner() {
 clear
-echo "${Y} █▀▄ █▀▀ █▄   ▀ ▄▀▄  ▄   ▀█▀ █▀▀ █▀█ █▀▄▀█ █░█ ▀▄▀   ▀▄▀ ▄▀█ ▄▀█  "${W}
-echo "${Y} █▄▀ ██▄ █▄▀ ░█ █▀█ █░█  ░█░ ██▄ █▀▄ █░▀░█ █▄█ █░█   █░█  ░█  ░█  "${W}
+echo "${Y} █▀▄ █▀▀ █▄   ▀ ▄▀▄  ▄     ▀▄▀ ▄▀█ ▄▀█  "${W}
+echo "${Y} █▄▀ ██▄ █▄▀ ░█ █▀█ █░█    █░█  ░█  ░█  "${W}
 echo
 echo "${C}${BOLD} Install Proot-Distro Debian with XFCE4/Termux X11 in Termux"${W}
 echo
-}
+}.
 
 function confirmation_y_or_n() {
 	 while true; do
