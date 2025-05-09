@@ -260,7 +260,7 @@ proot-distro login ubuntu --user $user_name -- sudo apt update -y
 #proot-distro login ubuntu --user $user_name -- sudo apt install -y software-properties-common
 #proot-distro login ubuntu --user $user_name -- sudo add-apt-repository ppa:xtradeb/apps -y
 #vsudo apt update -y
-proot-distro login ubuntu --user $user_name -- sudo apt install -y chromium
+proot-distro login ubuntu --user $user_name -- sudo apt install -y chromium-browser
 proot-distro login ubuntu --user $user_name -- sudo apt update -y
 #proot-distro login ubuntu --user $user_name -- sed -i 's@chromium \%U@chromium --no-sandbox \%U@g' /usr/share/applications/chromium.desktop
 #proot-distro login ubuntu --user $user_name -- chromium --no-sandbox
@@ -302,8 +302,8 @@ banner
 echo "${G}${BOLD} Setting up Proot-Distro Ubuntu ${Y}done${G}."${W}
 cd ~
 echo "${G}Installed versions:"${W}
-proot-distro login debian --user $user_name -- lsb_release -a
-proot-distro login ubuntu --user $user_name -- chromium --version
+proot-distro login ubuntu --user $user_name -- lsb_release -a
+proot-distro login ubuntu --user $user_name -- chromium-browser --version
 proot-distro login ubuntu --user $user_name -- code --version
 proot-distro login ubuntu --user $user_name -- git --version
 proot-distro login ubuntu --user $user_name -- node --version
