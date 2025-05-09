@@ -9,9 +9,15 @@ For better convenience additionally some developer stuff like [__VSCode__](https
 - Install [__Termux__](https://github.com/termux/termux-app/releases) Android app from [__GitHub__](https://github.com/termux).
 - Install [__Termux X11__](https://github.com/termux/termux-x11/releases) Android app from [__GitHub__](https://github.com/termux).
 - In the terminal clone this repo and run script:
+  - Debian:
 ```bash
 curl -Lf https://raw.githubusercontent.com/brian200508/proot-distro-debian-termux-x11/main/install-debian.sh -o install-debian.sh && chmod +x install-debian.sh && ./install-debian.sh
 ```
+  - Ubuntu:
+```bash
+curl -Lf https://raw.githubusercontent.com/brian200508/proot-distro-debian-termux-x11/main/install-ubuntu.sh -o install-ubuntu.sh && chmod +x install-ubuntu.sh && ./install-ubuntu.sh
+```
+
 - Restart Termux: run the command below, close Termux App and open Termux App again
 ```bash
 exit

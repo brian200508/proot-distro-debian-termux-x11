@@ -10,10 +10,10 @@ BOLD="$(printf '\033[1m')"
 
 function banner() {
 clear
-echo "${Y} █▀▄ █▀▀ █▄   ▀ ▄▀▄  ▄     ▀▄▀ ▄▀█ ▄▀█  "${W}
-echo "${Y} █▄▀ ██▄ █▄▀ ░█ █▀█ █░█    █░█  ░█  ░█  "${W}
+echo "${Y} █ █ █▄  █ █  ▄  █▄  █ █   ▀▄▀ ▄▀█ ▄▀█  "${W}
+echo "${Y} █▄▀ █▄▀ █▄▀ █░█ ▀▄▄ █▄▀   █░█  ░█  ░█  "${W}
 echo
-echo "${C}${BOLD} Install Proot-Distro Debian with XFCE4/Termux X11 in Termux"${W}
+echo "${C}${BOLD} Install Proot-Distro Ubuntu with XFCE4/Termux X11 in Termux"${W}
 echo
 }
 
@@ -59,19 +59,19 @@ function setup_tx11autostart() {
     confirmation_y_or_n "Do you want to start Termux X11 automatically with Termux?" tx11_autostart
     if [[ "$tx11_autostart" == "y" ]]; then
         # check if already configured
-        if grep -q "^startxfce4-debian.sh" $rc_file; then
+        if grep -q "^startxfce4-ubuntu.sh" $rc_file; then
             echo "Termux:X11 start already appended"
         else
             echo '# Start Termux:X11' >> $rc_file
-            #echo 'if [ $( ps aux | grep -c "termux.x11" ) -gt 1 ]; then echo "X server is already running." ; else startxfce4-debian.sh ; fi' >> $rc_file
-            echo '~/startxfce4-debian.sh &' >> $rc_file
+            #echo 'if [ $( ps aux | grep -c "termux.x11" ) -gt 1 ]; then echo "X server is already running." ; else startxfce4-ubuntu.sh ; fi' >> $rc_file
+            echo '~/startxfce4-ubuntu.sh &' >> $rc_file
             echo "Termux:X11 start add to $rc_file"
         fi
     else
         # check if already configured
-        if grep -q "^startxfce4-debian.sh" $rc_file; then
+        if grep -q "^startxfce4-ubuntu.sh" $rc_file; then
             sed -i "" "/Start Termux:X11/d" $rc_file
-            sed -i "" "/startxfce4-debian.sh/d" $rc_file
+            sed -i "" "/startxfce4-ubuntu.sh/d" $rc_file
             echo "Termux:X11 start removed from $rc_file"
         fi
     fi
@@ -151,19 +151,19 @@ done
 fi
 
     echo "${G}${BOLD} Setting up User $user_name..."${W}
-    proot-distro login debian -- apt update -y
-    proot-distro login debian -- apt install -y sudo nano adduser
+    proot-distro login ubuntu -- apt update -y
+    proot-distro login ubuntu -- apt install -y sudo nano adduser
     if [[ "$pd_pass_type" == "1" ]]; then
-        proot-distro login debian -- adduser --disabled-password $user_name
-        proot-distro login debian -- passwd -d $user_name
+        proot-distro login ubuntu -- adduser --disabled-password $user_name
+        proot-distro login ubuntu -- passwd -d $user_name
     else
-        proot-distro login debian -- adduser $user_name
+        proot-distro login ubuntu -- adduser $user_name
     fi
-    proot-distro login debian -- sed -i "$ a # Add $user_name to sudoers" /etc/sudoers
+    proot-distro login ubuntu -- sed -i "$ a # Add $user_name to sudoers" /etc/sudoers
     if [[ "$pd_pass_type" == "1" ]]; then
-        proot-distro login debian -- sed -i "$ a $user_name ALL=(ALL) NOPASSWD:ALL" /etc/sudoers
+        proot-distro login ubuntu -- sed -i "$ a $user_name ALL=(ALL) NOPASSWD:ALL" /etc/sudoers
     else
-        proot-distro login debian -- sed -i "$ a $user_name ALL=(ALL:ALL) ALL" /etc/sudoers
+        proot-distro login ubuntu -- sed -i "$ a $user_name ALL=(ALL:ALL) ALL" /etc/sudoers
     fi
     fi
 }
@@ -198,10 +198,10 @@ wait_for_key
 #termux-nerd-installer s jetbrains-mono-ligatures
 ##termux-nerd-installer l i
 
-# Setup Debian
+# Setup Ubuntu
 banner
-echo "${G}${BOLD} Setting up Proot-Distro Debian..."${W}
-proot-distro install debian
+echo "${G}${BOLD} Setting up Proot-Distro Ubuntu..."${W}
+proot-distro install ubuntu
 wait_for_key
 
 # Setup user
@@ -211,80 +211,80 @@ wait_for_key
 # Install XFCE4
 banner
 echo "${G}${BOLD} Setting up Proot-Distro XFCE4..."${W}
-proot-distro login debian --user $user_name -- sudo apt install -y xfce4
-curl -Lf https://raw.githubusercontent.com/brian200508/proot-distro-debian-termux-x11/main/startxfce4-debian.sh -o ~/startxfce4-debian.sh
-sed -i "s@\%USER_NAME\%@$user_name@g" ~/startxfce4-debian.sh
-chmod +x ~/startxfce4-debian.sh
+proot-distro login ubuntu --user $user_name -- sudo apt install -y xfce4
+curl -Lf https://raw.githubusercontent.com/brian200508/proot-distro-ubuntu-termux-x11/main/startxfce4-ubuntu.sh -o ~/startxfce4-ubuntu.sh
+sed -i "s@\%USER_NAME\%@$user_name@g" ~/startxfce4-ubuntu.sh
+chmod +x ~/startxfce4-ubuntu.sh
 wait_for_key
 
 ## Customize XFCE4
 #banner
 #echo "${G}${BOLD} Customizing Proot-Distro XFCE4..."${W}
-#proot-distro login debian --user $user_name -- sudo apt install -y xfce4-whiskermenu-plugin
-#proot-distro login debian --user $user_name -- sudo apt install -y mugshot
-#proot-distro login debian --user $user_name -- apt search icon-theme
-#proot-distro login debian --user $user_name -- sudo apt install -y papirus-icon-theme moka-icon-theme
-#proot-distro login debian --user $user_name -- apt search gtk-themes
-#proot-distro login debian --user $user_name -- sudo apt install -y numix-gtk-theme greybird-gtk-theme
-#proot-distro login debian --user $user_name -- sudo apt install -y plank
-#proot-distro login debian --user $user_name -- plank --preferences
-#proot-distro login debian --user $user_name -- sudo apt install -y conky-all
+#proot-distro login ubuntu --user $user_name -- sudo apt install -y xfce4-whiskermenu-plugin
+#proot-distro login ubuntu --user $user_name -- sudo apt install -y mugshot
+#proot-distro login ubuntu --user $user_name -- apt search icon-theme
+#proot-distro login ubuntu --user $user_name -- sudo apt install -y papirus-icon-theme moka-icon-theme
+#proot-distro login ubuntu --user $user_name -- apt search gtk-themes
+#proot-distro login ubuntu --user $user_name -- sudo apt install -y numix-gtk-theme greybird-gtk-theme
+#proot-distro login ubuntu --user $user_name -- sudo apt install -y plank
+#proot-distro login ubuntu --user $user_name -- plank --preferences
+#proot-distro login ubuntu --user $user_name -- sudo apt install -y conky-all
 
 ## Fix vscode.list: Use signed Microsoft Repo
 #banner
 #echo "${G}${BOLD} Signing VSCode repository..."${W}
-#proot-distro login debian -- sudo apt install -y wget gpg apt-transport-https
-#proot-distro login debian -- wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
-#proot-distro login debian -- sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
-#proot-distro login debian -- sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
-#proot-distro login debian -- rm -f packages.microsoft.gpg
-#proot-distro login debian -- sudo apt update -y
+#proot-distro login ubuntu -- sudo apt install -y wget gpg apt-transport-https
+#proot-distro login ubuntu -- wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
+#proot-distro login ubuntu -- sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
+#proot-distro login ubuntu -- sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
+#proot-distro login ubuntu -- rm -f packages.microsoft.gpg
+#proot-distro login ubuntu -- sudo apt update -y
 #wait_for_key
 
 # Intall latest VSCode
 banner
 echo "${G}${BOLD} Setting up latest VSCode..."${W}
-proot-distro login debian --user $user_name -- wget -O ~/code_stable_arm64.deb 'https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-arm64'
-proot-distro login debian --user $user_name -- sudo apt install -y ~/code_stable_arm64.deb
-proot-distro login debian --user $user_name -- rm ~/code_stable_arm64.deb
-proot-distro login debian --user $user_name -- sudo apt update -y
-#proot-distro login debian --user $user_name -- code --no-sandbox 
-#proot-distro login debian --user $user_name -- sed -i 's@code --new-window \%F@code --no-sandbox --new-window \%F@g' /usr/share/applications/code.desktop
-#proot-distro login debian --user $user_name -- sed -i 's@code \%F@code --no-sandbox \%F@g' /usr/share/applications/code.desktop
+proot-distro login ubuntu --user $user_name -- wget -O ~/code_stable_arm64.deb 'https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-arm64'
+proot-distro login ubuntu --user $user_name -- sudo apt install -y ~/code_stable_arm64.deb
+proot-distro login ubuntu --user $user_name -- rm ~/code_stable_arm64.deb
+proot-distro login ubuntu --user $user_name -- sudo apt update -y
+#proot-distro login ubuntu --user $user_name -- code --no-sandbox 
+#proot-distro login ubuntu --user $user_name -- sed -i 's@code --new-window \%F@code --no-sandbox --new-window \%F@g' /usr/share/applications/code.desktop
+#proot-distro login ubuntu --user $user_name -- sed -i 's@code \%F@code --no-sandbox \%F@g' /usr/share/applications/code.desktop
 wait_for_key
 
 # Install Chromium Browser
 banner
 echo "${G}${BOLD} Setting up Chromium browser..."${W}
-proot-distro login debian --user $user_name -- sudo apt update -y
-#proot-distro login debian --user $user_name -- sudo apt install -y software-properties-common
-#proot-distro login debian --user $user_name -- sudo add-apt-repository ppa:xtradeb/apps -y
+proot-distro login ubuntu --user $user_name -- sudo apt update -y
+#proot-distro login ubuntu --user $user_name -- sudo apt install -y software-properties-common
+#proot-distro login ubuntu --user $user_name -- sudo add-apt-repository ppa:xtradeb/apps -y
 #vsudo apt update -y
-proot-distro login debian --user $user_name -- sudo apt install -y chromium
-proot-distro login debian --user $user_name -- sudo apt update -y
-#proot-distro login debian --user $user_name -- sed -i 's@chromium \%U@chromium --no-sandbox \%U@g' /usr/share/applications/chromium.desktop
-#proot-distro login debian --user $user_name -- chromium --no-sandbox
+proot-distro login ubuntu --user $user_name -- sudo apt install -y chromium
+proot-distro login ubuntu --user $user_name -- sudo apt update -y
+#proot-distro login ubuntu --user $user_name -- sed -i 's@chromium \%U@chromium --no-sandbox \%U@g' /usr/share/applications/chromium.desktop
+#proot-distro login ubuntu --user $user_name -- chromium --no-sandbox
 wait_for_key
 
 # Git, Python3 and essentials
 banner
 echo "${G}${BOLD} Setting up Git, Python3 and essentials..."${W}
-proot-distro login debian --user $user_name -- sudo apt update -y
-proot-distro login debian --user $user_name -- sudo apt install -y build-essential curl gh git lsb-release wget pgp python-is-python3 python3-distutils python3-venv python3-pip
+proot-distro login ubuntu --user $user_name -- sudo apt update -y
+proot-distro login ubuntu --user $user_name -- sudo apt install -y build-essential curl gh git lsb-release wget pgp python-is-python3 python3-distutils python3-venv python3-pip
 wait_for_key
 
 # Node.js
 banner
 echo "${G}${BOLD} Setting up Node.js..."${W}
-proot-distro login debian --user $user_name -- sudo apt update -y
-proot-distro login debian --user $user_name -- sudo apt install -y nodejs npm
+proot-distro login ubuntu --user $user_name -- sudo apt update -y
+proot-distro login ubuntu --user $user_name -- sudo apt install -y nodejs npm
 wait_for_key
 
 # fix desktop links
 banner
 echo "${G}${BOLD} Fixing desktop links..."${W}
-proot-distro login debian --user $user_name -- curl -Lf https://raw.githubusercontent.com/brian200508/proot-distro-debian-termux-x11/main/fix-desktop-links.sh -o ~/fix-desktop-links.sh
-proot-distro login debian --user $user_name -- chmod +x ~/fix-desktop-links.sh
+proot-distro login ubuntu --user $user_name -- curl -Lf https://raw.githubusercontent.com/brian200508/proot-distro-ubuntu-termux-x11/main/fix-desktop-links.sh -o ~/fix-desktop-links.sh
+proot-distro login ubuntu --user $user_name -- chmod +x ~/fix-desktop-links.sh
 wait_for_key
 
 # Termux X11 autostart
@@ -294,21 +294,21 @@ setup_tx11autostart
 
 echo ""
 echo "${G}${BOLD} Removing installer script..."${W}
-rm -f ~/install-debian.sh
+rm -f ~/install-ubuntu.sh
 wait_for_key
 
 # Summary
 banner
-echo "${G}${BOLD} Setting up Proot-Distro Debian ${Y}done${G}."${W}
+echo "${G}${BOLD} Setting up Proot-Distro Ubuntu ${Y}done${G}."${W}
 cd ~
 echo "${G}Installed versions:"${W}
 proot-distro login debian --user $user_name -- lsb_release -a
-proot-distro login debian --user $user_name -- chromium --version
-proot-distro login debian --user $user_name -- code --version
-proot-distro login debian --user $user_name -- git --version
-proot-distro login debian --user $user_name -- node --version
-proot-distro login debian --user $user_name -- npm --version
-proot-distro login debian --user $user_name -- python --version
+proot-distro login ubuntu --user $user_name -- chromium --version
+proot-distro login ubuntu --user $user_name -- code --version
+proot-distro login ubuntu --user $user_name -- git --version
+proot-distro login ubuntu --user $user_name -- node --version
+proot-distro login ubuntu --user $user_name -- npm --version
+proot-distro login ubuntu --user $user_name -- python --version
 echo ""
 echo "${G}Don't forget Your Git config:"${W}
 echo "    ${Y}git config --global user.name \"Your Name\""${W}
@@ -316,12 +316,12 @@ echo "    ${Y}git config --global user.email \"your.email-address@domain.com\""$
 echo ""
 echo "${G}After Chromium or VSCode update You can fix the desktop application links"${W}
 echo "${G}by running this command (in Proot-Distro):"${W}
-echo "    ${C}curl -Lf https://raw.githubusercontent.com/brian200508/proot-distro-debian-termux-x11/main/fix-desktop-links.sh -o ~/fix-desktop-links.sh${G} once"${W}
+echo "    ${C}curl -Lf https://raw.githubusercontent.com/brian200508/proot-distro-ubuntu-termux-x11/main/fix-desktop-links.sh -o ~/fix-desktop-links.sh${G} once"${W}
 echo "    ${C}chmod +x ~/fix-desktop-links.sh{G} once"${W}
 echo "    ${Y}~/fix-desktop-links.sh"${W}
 echo ""
 echo "${G}Start XFCE manually (in Termux - ${Y}not in Proot-Distro!!!${G})"${W}
-echo "    ${Y}~/startxfce4_debian.sh"${W}
+echo "    ${Y}~/startxfce4_ubuntu.sh"${W}
 echo ""
 echo "${G}You should ${Y}restart Termux${G} right now${Y}!!!${G}"${W}
 echo "${G}Run the command below, close Termux App and open Termux App again"${W}
