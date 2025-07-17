@@ -205,10 +205,10 @@ wait_for_key
 setup_user
 wait_for_key
 
-# Install XFCE4
+# Install Debian launch script
 banner
-echo "${G}${BOLD} Setting up Proot-Distro XFCE4..."${W}
-proot-distro login debian --user $user_name -- sudo apt install -y xfce4
+echo "${G}${BOLD} Setting up Proot-Distro Debian launch script..."${W}
+proot-distro login debian --user $user_name -- sudo apt update -y
 curl -Lf https://raw.githubusercontent.com/brian200508/proot-distro-debian-termux-x11/main/startprootdistro-debian.sh -o ~/startprootdistro-debian.sh
 sed -i "s@\%USER_NAME\%@$user_name@g" ~/startprootdistro-debian.sh
 chmod +x ~/startprootdistro-debian.sh
