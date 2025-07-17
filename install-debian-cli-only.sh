@@ -63,7 +63,7 @@ function setup_debautostart() {
             echo "Debian start already appended"
         else
             echo '# Start Debian' >> $rc_file
-            echo '~/startprootdistro-debian.sh &' >> $rc_file
+            echo '~/startprootdistro-debian.sh' >> $rc_file
             echo "Debian start add to $rc_file"
         fi
     else
