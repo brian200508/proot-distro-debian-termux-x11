@@ -13,6 +13,11 @@ For better convenience additionally some developer stuff like [__VSCode__](https
 curl -Lf https://raw.githubusercontent.com/brian200508/proot-distro-debian-termux-x11/main/install-debian.sh -o install-debian.sh && chmod +x install-debian.sh && ./install-debian.sh
 ```
 
+- For Command Line Interface only:
+```bash
+curl -Lf https://raw.githubusercontent.com/brian200508/proot-distro-debian-termux-x11/main/install-debian-cli-only.sh -o install-debian-cli-only.sh && chmod +x install-debian-cli-only.sh && ./install-debian-cli-only.sh
+```
+
 - Restart Termux: run the command below, close Termux App and open Termux App again
 ```bash
 exit
