@@ -270,7 +270,7 @@ wait_for_key
 banner
 echo "${G}${BOLD} Setting up Git, Python3 and essentials..."${W}
 proot-distro login debian --user $user_name -- sudo apt update -y
-proot-distro login debian --user $user_name -- sudo apt install -y build-essential curl gh git lsb-release wget pgp python-is-python3 python3-distutils python3-venv python3-pip
+proot-distro login debian --user $user_name -- sudo apt install -y build-essential curl gh git lsb-release wget pgp python-is-python3 python3-venv python3-pip
 wait_for_key
 
 # Node.js
@@ -323,7 +323,7 @@ echo ""
 echo "${G}Start XFCE manually (in Termux - ${Y}not in Proot-Distro!!!${G})"${W}
 echo "    ${Y}~/startxfce4_debian.sh"${W}
 echo ""
-echo "${G}You should ${Y}restart Termux${G} right now${Y}!!!${G}"${W}
+echo "${G}You should ${Y}restart Termux${G} right now${Y}!!!"${W}
 echo "${G}Run the command below, close Termux App and open Termux App again"${W}
 echo "    ${Y}exit"${W}
 echo ""
