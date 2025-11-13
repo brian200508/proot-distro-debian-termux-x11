@@ -228,7 +228,6 @@ wait_for_key
 # Intall latest VSCode-CLI
 banner
 echo "${G}${BOLD} Setting up latest VSCode-CLI..."${W}
-https://code.visualstudio.com/download#
 proot-distro login debian --user $user_name -- wget -O ~/code_stable_arm64.deb 'https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-arm64'
 proot-distro login debian --user $user_name -- sudo apt install -y ~/code_stable_arm64.deb
 proot-distro login debian --user $user_name -- rm ~/code_stable_arm64.deb
