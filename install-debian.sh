@@ -77,6 +77,33 @@ function setup_tx11autostart() {
     fi
 }
 
+function setup_debautostart() {
+    #if [[ "$zsh_answer" == "y" ]]; then
+    #    rc_file=~/.zshrc
+    #else
+        rc_file=~/.bashrc
+    #fi
+    #banner
+    confirmation_y_or_n "Do you want to start Debian automatically with Termux?" deb_autostart
+    if [[ "$deb_autostart" == "y" ]]; then
+        # check if already configured
+        if grep -q "^startprootdistro-debian.sh" $rc_file; then
+            echo "Debian start already appended"
+        else
+            echo '# Start Debian' >> $rc_file
+            echo '~/startprootdistro-debian.sh' >> $rc_file
+            echo "Debian start add to $rc_file"
+        fi
+    else
+        # check if already configured
+        if grep -q "^startprootdistro-debian.sh" $rc_file; then
+            sed -i "" "/Start Debian/d" $rc_file
+            sed -i "" "/startprootdistro-debian.sh/d" $rc_file
+            echo "Debian start removed from $rc_file"
+        fi
+    fi
+}
+
 function setup_user() {
     banner
 	confirmation_y_or_n "Do you want to create a normal user account ${C}(Recomended)" pd_useradd_answer
@@ -291,6 +318,11 @@ wait_for_key
 banner
 echo "${G}${BOLD} Setting up X11 autostart..."${W}
 setup_tx11autostart
+
+# Debian autostart
+banner
+echo "${G}${BOLD} Setting up Debian autostart..."${W}
+setup_debautostart
 
 echo ""
 echo "${G}${BOLD} Removing installer script..."${W}
