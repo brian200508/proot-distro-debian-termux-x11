@@ -209,7 +209,7 @@ wait_for_key
 banner
 echo "${G}${BOLD} Setting up Proot-Distro Debian launch script..."${W}
 proot-distro login debian --user $user_name -- sudo apt update -y
-curl -Lf https://raw.githubusercontent.com/brian200508/proot-distro-debian-termux-x11/main/startprootdistro-debian.sh -o ~/startprootdistro-debian.sh
+curl -Lf https://raw.githubusercontent.com/brian200508/proot-distro-debian-termux-x11/main/startprootdistro-debian-cli.sh -o ~/startprootdistro-debian.sh
 sed -i "s@\%USER_NAME\%@$user_name@g" ~/startprootdistro-debian.sh
 chmod +x ~/startprootdistro-debian.sh
 wait_for_key
