@@ -352,6 +352,7 @@ echo "${G}Installed versions:"${W}
 proot-distro login debian --user $user_name -- lsb_release -a
 proot-distro login debian --user $user_name -- chromium --version
 proot-distro login debian --user $user_name -- code --version
+proot-distro login debian --user $user_name -- fresh --version
 proot-distro login debian --user $user_name -- git --version
 proot-distro login debian --user $user_name -- node --version
 proot-distro login debian --user $user_name -- npm --version
