@@ -251,7 +251,7 @@ wait_for_key
 # Fresh
 banner
 echo "${G}${BOLD} Setting up Node.js..."${W}
-proot-distro login debian --user $user_name -- sudo npm install -g @fresh-editor/fresh-editor
+proot-distro login debian --user $user_name -- npm install -g @fresh-editor/fresh-editor
 wait_for_key
 
 # Debian autostart
@@ -271,6 +271,7 @@ cd ~
 echo "${G}Installed versions:"${W}
 proot-distro login debian --user $user_name -- lsb_release -a
 proot-distro login debian --user $user_name -- code --version
+proot-distro login debian --user $user_name -- fresh --version
 proot-distro login debian --user $user_name -- git --version
 proot-distro login debian --user $user_name -- node --version
 proot-distro login debian --user $user_name -- npm --version
