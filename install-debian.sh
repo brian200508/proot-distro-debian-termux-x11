@@ -316,6 +316,12 @@ proot-distro login debian --user $user_name -- sudo apt update -y
 proot-distro login debian --user $user_name -- sudo apt install -y nodejs npm
 wait_for_key
 
+# Fresh
+banner
+echo "${G}${BOLD} Setting up Node.js..."${W}
+proot-distro login debian --user $user_name -- npm install -g @fresh-editor/fresh-editor
+wait_for_key
+
 # fix desktop links
 banner
 echo "${G}${BOLD} Fixing desktop links..."${W}
