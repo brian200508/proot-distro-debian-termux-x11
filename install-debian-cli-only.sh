@@ -250,7 +250,7 @@ wait_for_key
 
 # Fresh
 banner
-echo "${G}${BOLD} Setting up Node.js..."${W}
+echo "${G}${BOLD} Setting up Fresh..."${W}
 proot-distro login debian --user $user_name -- npm install -g @fresh-editor/fresh-editor
 wait_for_key
 
