@@ -10,10 +10,10 @@ BOLD="$(printf '\033[1m')"
 
 function banner() {
 clear
-echo "${Y} █▀▄ █▀▀ █▄   ▀ ▄▀▄  ▄     ▄▀▀ ░█  ░█  "${W}
-echo "${Y} █▄▀ ██▄ █▄▀ ░█ █▀█ █░█    ▀▄▄ ░█▄ ░█  "${W}
+echo "${Y} █▀▄ █▀▀ █▄   ▀ ▄▀▄  ▄     ▄▀▀ ░█  ░█"${W}
+echo "${Y} █▄▀ ██▄ █▄▀ ░█ █▀█ █░█    ▀▄▄ ░█▄ ░█"${W}
 echo
-echo "${C}${BOLD} Install Proot-Distro Debian with VSCode-CLI in Termux"${W}
+echo "${C}${BOLD} Install Proot-Distro Debian with Fresh terminal editor in Termux"${W}
 echo
 }
 
@@ -225,14 +225,14 @@ wait_for_key
 #proot-distro login debian -- sudo apt update -y
 #wait_for_key
 
-# Intall latest VSCode-CLI
-banner
-echo "${G}${BOLD} Setting up latest VSCode-CLI..."${W}
-proot-distro login debian --user $user_name -- wget -O ~/code_stable_arm64.deb 'https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-arm64'
-proot-distro login debian --user $user_name -- sudo apt install -y ~/code_stable_arm64.deb
-proot-distro login debian --user $user_name -- rm ~/code_stable_arm64.deb
-proot-distro login debian --user $user_name -- sudo apt update -y
-wait_for_key
+## Intall latest VSCode-CLI
+#banner
+#echo "${G}${BOLD} Setting up latest VSCode-CLI..."${W}
+#proot-distro login debian --user $user_name -- wget -O ~/code_stable_arm64.deb 'https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-arm64'
+#proot-distro login debian --user $user_name -- sudo apt install -y ~/code_stable_arm64.deb
+#proot-distro login debian --user $user_name -- rm ~/code_stable_arm64.deb
+#proot-distro login debian --user $user_name -- sudo apt update -y
+#wait_for_key
 
 # Git, Python3 and essentials
 banner
@@ -270,7 +270,7 @@ echo "${G}${BOLD} Setting up Proot-Distro Debian ${Y}done${G}."${W}
 cd ~
 echo "${G}Installed versions:"${W}
 proot-distro login debian --user $user_name -- lsb_release -a
-proot-distro login debian --user $user_name -- code --version
+#proot-distro login debian --user $user_name -- code --version
 proot-distro login debian --user $user_name -- fresh --version
 proot-distro login debian --user $user_name -- git --version
 proot-distro login debian --user $user_name -- node --version
