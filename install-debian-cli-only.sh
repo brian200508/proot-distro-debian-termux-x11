@@ -241,11 +241,30 @@ proot-distro login debian --user $user_name -- sudo apt update -y
 proot-distro login debian --user $user_name -- sudo apt install -y build-essential curl gh git lsb-release wget pgp python-is-python3 python3-venv python3-pip
 wait_for_key
 
-# Node.js
+# locales
 banner
-echo "${G}${BOLD} Setting up Node.js..."${W}
+echo "${G}${BOLD} Setting up locales..."${W}
+proot-distro login debian --user $user_name -- sudo apt update -y
+proot-distro login debian --user $user_name -- sudo apt install -y debconf locales
+proot-distro login debian --user $user_name -- sudo dpkg-reconfigure locales
+wait_for_key
+
+# bundled Node.js
+banner
+echo "${G}${BOLD} Setting up bundled Node.js..."${W}
 proot-distro login debian --user $user_name -- sudo apt update -y
 proot-distro login debian --user $user_name -- sudo apt install -y nodejs npm
+wait_for_key
+
+# latest LTS Node.js
+banner
+echo "${G}${BOLD} Setting up latest LTS Node.js..."${W}
+proot-distro login debian --user $user_name -- sudo apt update -y
+proot-distro login debian --user $user_name -- curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.5/install.sh | bash
+proot-distro login debian --user $user_name -- \. "$HOME/.nvm/nvm.sh"
+proot-distro login debian --user $user_name -- nvm install 24
+proot-distro login debian --user $user_name -- node -v # Should print "v24.18.0".
+proot-distro login debian --user $user_name -- npm -v # Should print "11.16.0"
 wait_for_key
 
 # Fresh
