@@ -1,0 +1,6 @@
+# Always normalize to LF, regardless of platform/core.autocrlf settings.
+# These scripts run inside Termux/proot-distro (Linux); CRLF line endings
+# break shebangs and backslash-newline continuations there.
+* text=auto eol=lf
+
+*.sh text eol=lf
